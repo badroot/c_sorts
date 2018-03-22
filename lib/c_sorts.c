@@ -16,8 +16,6 @@
 #include "c_sorts.h"
 #include <stdio.h>
 
-#define ARRAYLENGTH(a) ( sizeof (a) / sizeof (*(a)) )
-
 void hello(void) {
     printf("Hello, World!\n");
 }
@@ -26,19 +24,22 @@ void hello(void) {
  * Assumes array is not null, otherwise division for array size will fail
  * for int arrays
  */
-void bubblesort(int data_set[]){
+void bubblesort(int data_set[], int size){
     int bound = 1;
-    int changes = 0;
-    int i = 0;
+    int changes = 1;
+    int i = 2;
     while( i > 1 && changes > 0 ) {
+//        printf("HERE\n");
         changes = 0;
-        for (i = 0; i < ARRAYLENGTH(data_set) - bound; i++) {
+        for (i = 0; i < size - bound; i++) {
             if (data_set[i] > data_set[i+1]) {
+//                printf("SWAP\n");
                 int temp = data_set[i];
                 data_set[i] = data_set[i+1];
                 data_set[i+1] = temp;
                 changes++;
             }
+//            printf("%d\n", i);
         }
         bound++;    //Increase bound to not touch the sorted section of the array
     }

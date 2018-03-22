@@ -7,6 +7,6 @@
 
 void hello(void);
 
-void bubblesort(int data_set[]);
+void bubblesort(int data_set[], int size);
 
 #endif //PROJECT_C_SORTS_H
