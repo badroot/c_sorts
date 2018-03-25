@@ -15,6 +15,7 @@ set(LIB_DIR lib)
 add_library(c_sorts SHARED ${LIB_DIR}/c_sorts.c ${LIB_DIR}/c_sorts.h)
 
 add_executable(sort_tests basic_tests.c)
+add_executable(perf HW5_CS288.c)
 
 #set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
@@ -29,3 +30,4 @@ add_executable(sort_tests basic_tests.c)
 
 #target_link_libraries(sort_tests gtest gtest_main)
 target_link_libraries(sort_tests c_sorts)
+target_link_libraries(perf c_sorts)

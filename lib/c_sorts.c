@@ -4,11 +4,10 @@
 
 /**
  * Algs to implement
- * TODO Bubblesort
  * TODO Insertion Sort
  * TODO Quicksort
  * TODO Shell sort
- * TODO Mergesort
+ * TODO Bottom Up Mergesort
  * TODO Heapsort
  * TODO Radix Sort
  */
@@ -17,14 +16,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//#define BIT_SET(var, shift) ( (var) & (1<<(shift) ) )
+
+struct Queue{
+    int front, back;
+    int* data;
+};
+
 void hello(void) {
     printf("Hello, World!\n");
+}
+
+int is_sorted(int carr[], int size){
+    for (int i = 0; i < size-1; ++i) {
+        if(carr[i] > carr[i+1]){ return 0; }
+    }
+    return 1;
 }
 
 void swap(int data_set[], int i, int j) {
     int temp = data_set[i];
     data_set[i] = data_set[j];
     data_set[j] = temp;
+}
+
+int max(int data_set[], int size){
+    int maxi = data_set[0];
+    for (int i = 1; i < size; ++i) {
+        if (data_set[i] > maxi ) { maxi = data_set[i]; }
+    }
+    return maxi;
+}
+
+int max_bit(int data_set[], int size){
+    int maxVal = max(data_set, size);
+    int check = 0;
+    int shift = 0;
+    for (shift; check <= maxVal ; ++shift) {
+        check = 0;
+        check |= 1<<shift;
+//        printf("MAX: %d\t CHECK: %d\t SHIFT: %d\n", maxVal, check, shift);
+    }
+    return shift-2;     //sub 1 to as the highest power after is not needed, sub 1 again to undo ++shift in loop
+}
+
+int* array_copy(int data_set[], int size){
+    int* newArr = (int*)calloc(size, sizeof(int));
+    for (int i = 0; i < size; ++i) {
+        newArr[i] = data_set[i];
+    }
+    return newArr;
+}
+
+void print_array(int data_set[], int size){
+    for (int i = 0; i < size; ++i) {
+        if ( 0 == i)        { printf("["); }
+        printf("%d", data_set[i]);
+        if( size - 1 == i)  { printf("]\n"); }
+        else                { printf(", "); }
+    }
 }
 
 /*
@@ -87,6 +137,49 @@ void merge(int arr[], int aux[], int lo, int mid, int hi){
         else { arr[k] = aux[i++]; }
     }
 
+}
+
+void radix_sort(int data_set[], int size) {
+    printf("GETS TO SORT\n");
+    int maxbit = max_bit(data_set, size);
+//    printf("MAXBIT: %d\n", maxbit);
+    for (int i = 0; i <= maxbit; ++i) {
+//        printf("MB LOOP\n");
+        struct Queue* zqueue = (struct Queue*)malloc(sizeof(struct Queue));
+        struct Queue* oqueue = (struct Queue*)malloc(sizeof(struct Queue));
+//        *zqueue = (struct Queue)(0, 0, );
+        zqueue->front = 0;
+        zqueue->back = 0;
+        oqueue->front = 0;
+        oqueue->back = 0;
+        zqueue->data = (int*)calloc(size, sizeof(int));
+        oqueue->data = (int*)calloc(size, sizeof(int));
+//        printf("MB INIT\n");
+        for (int j = 0; j < size; ++j) {
+//            printf("BUCKET LOOP %d\n", j);
+//            print_array(zqueue->data, size);
+//            print_array(oqueue->data, size);
+            int tt = (data_set[j] << i) & 1;
+//            printf("BOOL %d\n", tt);
+            if ((data_set[j] >> i) & 1) { oqueue->data[oqueue->back++] = data_set[j]; }
+            else                        { zqueue->data[zqueue->back++] = data_set[j]; }
+        }
+        int place = 0;
+//        printf("TO PLACE\n");
+        for (; zqueue->front < zqueue->back; (zqueue->front)++) {
+            data_set[place++] = zqueue->data[zqueue->front];
+        }
+//        print_array(data_set, size);
+
+        for (; oqueue->front < oqueue->back; (oqueue->front)++) {
+            data_set[place++] = oqueue->data[oqueue->front];
+//            place++;
+        }
+//        print_array(data_set, size);
+
+        free(zqueue);
+        free(oqueue);
+    }
 }
 
 
