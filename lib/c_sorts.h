@@ -7,12 +7,12 @@
 
 void hello(void);
 
-int is_sorted(int carr[], int size);
+int is_sorted(const int data_set[], int size);
 void swap(int data_set[], int i, int j);
-int max(int data_set[], int size);
-int max_bit(int data_set[], int size);
-int* array_copy(int data_set[], int size);
-void print_array(int data_set[], int size);
+int max(const int data_set[], int size);
+int max_bit(const int data_set[], int size);
+int* array_copy(const int data_set[], int size);
+void print_array(const int data_set[], int size);
 
 void bubblesort(int data_set[], int size);
 
