@@ -7,7 +7,6 @@
  * TODO Insertion Sort
  * TODO Quicksort
  * TODO Shell sort
- * TODO Bottom Up Mergesort
  * TODO Heapsort
  * TODO American Flag
  */
@@ -57,6 +56,11 @@ void swap(int data_set[], int i, int j) {
     data_set[i] = data_set[j];
     data_set[j] = temp;
 }
+
+int bin_min(int a, int b){
+    return a < b ? a : b;
+}
+
 
 /**
  * max iterates through an array to find the largest value
@@ -180,6 +184,19 @@ void td_sort(int arr[], int aux[], int lo, int hi) {
     td_sort(arr, aux, mid+1, hi);
     merge(arr, aux, lo, mid, hi);
 }
+
+void bu_mergesort(int data_set[], int size) {
+    int* aux = (int *)calloc(size, sizeof(int));
+    for (int m_len = 1; m_len < size; m_len *= 2){
+        for (int lo = 0; lo < size - m_len; lo += 2*m_len) {
+            merge(data_set, aux, lo, lo+m_len-1, bin_min( (2*m_len)+lo-1, size-1));
+        }
+    }
+}
+
+//void bu_sort(int arr[], int aux[], int lo, int hi, ) {
+//
+//}
 
 /**
  * merge is used for top-down and bottom-up mergesort

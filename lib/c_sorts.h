@@ -20,6 +20,8 @@ void sel_sort(int data_set[], int size);
 
 void td_mergesort(int data_set[], int size);
 
+void bu_mergesort(int data_set[], int size);
+
 void td_sort(int arr[], int aux[], int lo, int hi);
 
 void merge(int arr[], int aux[], int lo, int mid, int hi);

@@ -1,7 +1,7 @@
 //
 // Created by Red on 4/7/2018.
 //
-//#define verbose
+#define verbose
 #include <stdlib.h>
 #include <random>
 #include <iostream>
@@ -21,7 +21,7 @@ void randomize_array(int* array, int arr_max, int range){
 }
 
 int main(int argc, char *argv[]){
-    int arr_max = 1000;
+    int arr_max = 40;
     int range = 100;
     int sort_arr[arr_max];
     cout<<"STARTING TESTS"<<endl;
@@ -79,6 +79,21 @@ int main(int argc, char *argv[]){
 
     cout<<"Top-Down Mergesort: ";
     td_mergesort(sort_arr, arr_max);
+    if (is_sorted(sort_arr, arr_max)){
+        cout<<"Sorted"<<endl;
+    } else {
+        cout<<"Failed"<<endl;
+    }
+#ifdef verbose
+    print_array(sort_arr, arr_max);
+#endif
+    randomize_array(sort_arr, arr_max, range);
+#ifdef verbose
+    print_array(sort_arr, arr_max);
+#endif
+
+    cout<<"Bottom-Up Mergesort: ";
+    bu_mergesort(sort_arr, arr_max);
     if (is_sorted(sort_arr, arr_max)){
         cout<<"Sorted"<<endl;
     } else {
