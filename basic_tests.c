@@ -9,13 +9,6 @@
 
 #define ARRAYLENGTH(a) ( sizeof (a) / sizeof (*(a)) )
 
-int is_sorted(int carr[], int size){
-    for (int i = 0; i < size-1; ++i) {
-        if(carr[i] > carr[i+1]){ return 0; }
-    }
-    return 1;
-}
-
 int main(int argc, char* argv[]) {
 //    int p = 2048;
 //    int* l = &p;

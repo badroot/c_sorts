@@ -112,7 +112,7 @@ int* array_copy(const int data_set[], int size){
 void print_array(const int data_set[], int size){
     for (int i = 0; i < size; ++i) {
         if ( 0 == i)        { printf("["); }
-        printf("%d", data_set[i]);
+                              printf("%d", data_set[i]);
         if( size - 1 == i)  { printf("]\n"); }
         else                { printf(", "); }
     }
