@@ -1,8 +1,7 @@
 //
 // Created by Red on 4/7/2018.
 //
-#define verbose
-#include <stdlib.h>
+//#define verbose
 #include <random>
 #include <iostream>
 extern "C" {
@@ -11,6 +10,12 @@ extern "C" {
 
 using namespace std;
 
+/**
+ * randomize_array is a utility to generate a new random set of data in a fixed-size array
+ * @param array is the pointer to the array
+ * @param arr_max is the size of the array
+ * @param range is the top of the range of the desired number generation, ie. from 1 to range
+ */
 void randomize_array(int* array, int arr_max, int range){
     random_device rd;
     mt19937 gen(rd());

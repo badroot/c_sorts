@@ -57,6 +57,12 @@ void swap(int data_set[], int i, int j) {
     data_set[j] = temp;
 }
 
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
 int bin_min(int a, int b){
     return a < b ? a : b;
 }
@@ -185,6 +191,11 @@ void td_sort(int arr[], int aux[], int lo, int hi) {
     merge(arr, aux, lo, mid, hi);
 }
 
+/**
+ *
+ * @param data_set
+ * @param size
+ */
 void bu_mergesort(int data_set[], int size) {
     int* aux = (int *)calloc(size, sizeof(int));
     for (int m_len = 1; m_len < size; m_len *= 2){
@@ -193,10 +204,6 @@ void bu_mergesort(int data_set[], int size) {
         }
     }
 }
-
-//void bu_sort(int arr[], int aux[], int lo, int hi, ) {
-//
-//}
 
 /**
  * merge is used for top-down and bottom-up mergesort
@@ -212,10 +219,10 @@ void merge(int arr[], int aux[], int lo, int mid, int hi){
     for (int k = lo; k <= hi; ++k) { aux[k] = arr[k]; }
 
     for (int k = lo; k <= hi ; ++k) {
-        if ( i > mid ) { arr[k] = aux[j++]; }
-        else if ( j > hi ) { arr[k] = aux[i++]; }
+        if ( i > mid )              { arr[k] = aux[j++]; }
+        else if ( j > hi )          { arr[k] = aux[i++]; }
         else if ( aux[j] < aux[i] ) { arr[k] = aux[j++]; }
-        else { arr[k] = aux[i++]; }
+        else                        { arr[k] = aux[i++]; }
     }
 
 }
